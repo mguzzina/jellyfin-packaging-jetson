@@ -140,7 +140,7 @@ def build_package_deb(
         fh.write(changelog)
 
     # Use a unique docker image name for consistency
-    imagename = f"{configurations[build_type]['imagename']}-{jellyfin_version}_{build_arch}-{build_type}-{build_version}"
+    imagename = f"{configurations[build_type]['imagename']}-{jellyfin_version}_{build_arch}-{build_type.replace('/','_')}-{build_version}"
 
     # Prepare the list of build-args
     build_args = list()
