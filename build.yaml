@@ -60,6 +60,19 @@ ubuntu:
   build_function: build_package_deb
   dockerfile: debian/docker/Dockerfile
   imagename: jellyfin-builder-ubuntu
+nvcr.io/nvidia/l4t-jetpack:
+  releases:
+    r35.3.1: r35.3.1
+  archmaps:
+    arm64:
+      PACKAGE_ARCH: arm64
+      GCC_ARCH: aarch64
+  cross-gcc:
+    r35.3.1: '10'
+  build_function: build_package_deb
+  dockerfile: debian/docker/Dockerfile
+  imagename: jellyfin-builder-jetpack
+    
 
 # Portable archives
 linux:
