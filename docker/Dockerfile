@@ -211,7 +211,7 @@ RUN if test "${PACKAGE_ARCH}" = "amd64"; then \
  && rm -rf /var/cache/apt/archives* /var/lib/apt/lists/*
 
 # Rockchip RK3588 libmali OpenCL dependencies:
-RUN if test "${PACKAGE_ARCH}" = "arm64"; then \
+RUN if test "${PLATFORM}" = "arm64"; then \
     mkdir libmali-rockchip \
  && cd libmali-rockchip \
  && curl -LO https://github.com/tsukumijima/libmali-rockchip/releases/download/${MALI_PKG_TAG}/libmali-${MALI_PKG_CFG}_${MALI_PKG_VER}.deb \

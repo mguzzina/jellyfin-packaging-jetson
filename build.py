@@ -456,6 +456,7 @@ def build_docker(
         DOTNET_ARCH = configurations["docker"]["archmaps"][_build_arch]["DOTNET_ARCH"]
         IMAGE_ARCH = configurations["docker"]["archmaps"][_build_arch]["IMAGE_ARCH"]
         TARGET_ARCH = configurations["docker"]["archmaps"][_build_arch]["TARGET_ARCH"]
+        PLATFORM = configurations["docker"]["archmaps"][_build_arch]["PLATFORM"]
         FFMPEG_PACKAGE = None
         if "FFMPEG_PACKAGE" in configurations["docker"]["archmaps"][_build_arch]:
             FFMPEG_PACKAGE = configurations["docker"]["archmaps"][_build_arch]["FFMPEG_PACKAGE"]
@@ -474,6 +475,9 @@ def build_docker(
         LIBICU_VERSION = None
         if "LIBICU_VERSION" in configurations["docker"]["archmaps"][_build_arch]:
             LIBICU_VERSION = configurations["docker"]["archmaps"][_build_arch]["LIBICU_VERSION"]
+        MALI_PKG_TAG = None
+        if "MALI_PKG_TAG" in configurations["docker"]["archmaps"][_build_arch]:
+            MALI_PKG_TAG = configurations["docker"]["archmaps"][_build_arch]["MALI_PKG_TAG"]
 
         # Use a unique docker image name for consistency
         if is_stable or is_preview:
@@ -501,6 +505,7 @@ def build_docker(
         build_args.append(f"--build-arg TARGET_ARCH={TARGET_ARCH}")
         build_args.append(f"--build-arg JELLYFIN_VERSION={jellyfin_version}")
         build_args.append(f"--build-arg CONFIG={'Debug' if debug else 'Release'}")
+        build_args.append(f"--build-arg PLATFORM={PLATFORM}")
         if FFMPEG_PACKAGE:
             build_args.append(f"--build-arg FFMPEG_PACKAGE={FFMPEG_PACKAGE}")
         if OS_NAME:
@@ -513,6 +518,8 @@ def build_docker(
             build_args.append(f"--build-arg COMBINED_IMAGE_NAME={COMBINED_IMAGE_NAME}")
         if LIBICU_VERSION:
             build_args.append(f"--build-arg LIBICU_VERSION={LIBICU_VERSION}")
+        if MALI_PKG_TAG:
+            build_args.append(f"--build-arg MALI_PKG_TAG={MALI_PKG_TAG}")
 
         # Determine framework versions
         framework_versions = _determine_framework_versions()
