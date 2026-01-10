@@ -484,8 +484,6 @@ def build_docker(
             imagename = f"{configurations['docker']['imagename']}:{jellyfin_version}-{_build_arch}.{date}"
         else:
             imagename = f"{configurations['docker']['imagename']}:{jellyfin_version}-{_build_arch}"
-        if build_arch and build_arch == "jetson":
-            imagename = f"{imagename}-jetson"
 
         if not host_arch or host_arch != PACKAGE_ARCH:
             # Clean up any existing qemu static image
